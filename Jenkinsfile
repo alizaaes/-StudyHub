@@ -29,5 +29,23 @@ pipeline {
                 sh 'docker build -t studyhub:latest .'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker rm -f studyhub-app || true
+
+                    docker run -d \
+                        --name studyhub-app \
+                        --network studyhub_complete_starter_default \
+                        --network-alias studyhub \
+                        --restart unless-stopped \
+                        -e SECRET_KEY="replace-with-a-long-random-secret" \
+                        -e DATA_DIR="/app/data" \
+                        -v studyhub_complete_starter_studyhub_data:/app/data \
+                        studyhub:latest
+                '''
+            }
+        }
     }
 }
