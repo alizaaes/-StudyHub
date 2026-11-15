@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -10,13 +11,16 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                sh 'python3 -m pip install -r requirements.txt'
+                sh '''
+                    python3 -m venv .venv
+                    .venv/bin/pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Syntax check') {
             steps {
-                sh 'python3 -m compileall -q app.py database.py'
+                sh '.venv/bin/python -m compileall -q app.py database.py'
             }
         }
 
