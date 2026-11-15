@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if student else 'Add' }} student | StudyHub{% endblock %}
+{% block content %}
+<section class="form-card">
+<h2>{{ 'Update student' if student else 'Register a student' }}</h2>
+<form method="post">
+<label>Full name</label><input name="name" required value="{{ student.name if student else '' }}">
+<label>Roll number</label><input name="roll_no" required value="{{ student.roll_no if student else '' }}">
+<label>Branch</label><input name="branch" required value="{{ student.branch if student else '' }}">
+<label>CGPA (0–10)</label><input type="number" name="cgpa" min="0" max="10" step="0.01" required value="{{ student.cgpa if student else '' }}">
+<div class="form-actions"><button class="primary" type="submit">Save student</button><a class="button secondary" href="{{ url_for('students') }}">Cancel</a></div>
+</form></section>
+{% endblock %}

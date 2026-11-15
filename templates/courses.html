@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Courses | StudyHub{% endblock %}
+{% block content %}
+<div class="page-heading"><div><h2>Course Management</h2><p>Keep your courses organised.</p></div>
+<a class="button primary" href="{{ url_for('add_course') }}">＋ Add course</a></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Course name</th><th>Course code</th><th>Credit hours</th><th>Semester</th><th>Actions</th></tr></thead>
+<tbody>{% for c in courses %}
+<tr><td>{{ c.course_name }}</td><td>{{ c.course_code }}</td><td>{{ c.credit_hours }}</td><td>{{ c.semester }}</td>
+<td class="actions"><a href="{{ url_for('edit_course', course_id=c.id) }}">Edit</a>
+<form method="post" action="{{ url_for('remove_course', course_id=c.id) }}" data-confirm="Delete this course?"><button class="text-danger" type="submit">Delete</button></form></td></tr>
+{% else %}<tr><td colspan="5" class="empty">No courses added yet.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

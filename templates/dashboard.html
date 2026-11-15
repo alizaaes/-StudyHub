@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | StudyHub{% endblock %}
+{% block content %}
+<section class="welcome">
+  <h2>Welcome to StudyHub! 🌷</h2>
+  <p>Your academic journey, organised in one place.</p>
+</section>
+<div class="stats-grid">
+  <article class="stat-card"><span>🎓</span><strong>{{ counts.students }}</strong><p>Students</p></article>
+  <article class="stat-card"><span>📚</span><strong>{{ counts.courses }}</strong><p>Courses</p></article>
+  <article class="stat-card"><span>📝</span><strong>{{ counts.assignments }}</strong><p>Assignments</p></article>
+  <article class="stat-card"><span>⏳</span><strong>{{ counts.pending }}</strong><p>Pending</p></article>
+  <article class="stat-card"><span>✅</span><strong>{{ counts.completed }}</strong><p>Completed</p></article>
+</div>
+<h3 class="section-title">Quick access</h3>
+<div class="quick-grid">
+  <a class="quick-card" href="{{ url_for('students') }}"><span>🎓</span><h3>Students</h3><p>Manage student records</p></a>
+  <a class="quick-card" href="{{ url_for('courses') }}"><span>📚</span><h3>Courses</h3><p>Organise course details</p></a>
+  <a class="quick-card" href="{{ url_for('assignments') }}"><span>📝</span><h3>Assignments</h3><p>Track deadlines and progress</p></a>
+</div>
+{% endblock %}

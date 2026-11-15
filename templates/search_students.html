@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Search student | StudyHub{% endblock %}
+{% block content %}
+<section class="form-card"><h2>Search student</h2>
+<form method="post"><label>Roll number</label><input name="roll_no" required><button class="primary" type="submit">Search</button></form>
+{% if student %}<div class="result-card"><h3>{{ student.name }}</h3><p><b>Roll:</b> {{ student.roll_no }}</p><p><b>Branch:</b> {{ student.branch }}</p><p><b>CGPA:</b> {{ "%.2f"|format(student.cgpa) }}</p></div>{% endif %}
+<a href="{{ url_for('students') }}">Back to students</a></section>
+{% endblock %}

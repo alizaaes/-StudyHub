@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Login | StudyHub{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <h2>Welcome back 🌷</h2>
+  <p>Log in to open your StudyHub dashboard.</p>
+  <form method="post">
+    <label>Username</label><input name="username" required autocomplete="username">
+    <label>Password</label><input type="password" name="password" required autocomplete="current-password">
+    <button class="primary full" type="submit">Log in</button>
+  </form>
+  <p class="muted">New to StudyHub? <a href="{{ url_for('signup') }}">Create an account</a></p>
+</section>
+{% endblock %}

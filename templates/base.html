@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StudyHub{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">
+    <a href="{{ url_for('dashboard') if session.get('user_id') else url_for('login') }}">StudyHub ♡</a>
+    <p>Your little space for academic success</p>
+  </div>
+  {% if session.get('user_id') %}
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('students') }}">Students</a>
+    <a href="{{ url_for('courses') }}">Courses</a>
+    <a href="{{ url_for('assignments') }}">Assignments</a>
+    <form class="nav-logout" method="post" action="{{ url_for('logout') }}">
+      <button class="link-button" type="submit">Log out</button>
+    </form>
+  </nav>
+  {% endif %}
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>© 2026 StudyHub ♡ | Built with Flask and SQLite</footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Create account | StudyHub{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <h2>Create your account ✨</h2>
+  <p>Choose a username and a password of at least 8 characters.</p>
+  <form method="post">
+    <label>Username</label><input name="username" required minlength="3" autocomplete="username">
+    <label>Password</label><input type="password" name="password" required minlength="8" autocomplete="new-password">
+    <label>Confirm password</label><input type="password" name="confirm_password" required minlength="8" autocomplete="new-password">
+    <button class="primary full" type="submit">Create account</button>
+  </form>
+  <p class="muted">Already registered? <a href="{{ url_for('login') }}">Log in</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                sh 'python3 -m pip install -r requirements.txt'
+            }
+        }
+
+        stage('Syntax check') {
+            steps {
+                sh 'python3 -m compileall -q app.py database.py'
+            }
+        }
+
+        stage('Build Docker image') {
+            steps {
+                sh 'docker build -t studyhub:latest .'
+            }
+        }
+    }
+}

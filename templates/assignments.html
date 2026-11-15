@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Assignments | StudyHub{% endblock %}
+{% block content %}
+<div class="page-heading"><div><h2>Assignment Tracker</h2><p>Keep track of tasks and deadlines.</p></div>
+<a class="button primary" href="{{ url_for('add_assignment') }}">＋ Add assignment</a></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Assignment</th><th>Course</th><th>Due date</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>{% for a in assignments %}
+<tr><td><strong>{{ a.title }}</strong><br><span class="muted">{{ a.description }}</span></td>
+<td>{{ a.course_code or '—' }}{% if a.course_name %}<br>{{ a.course_name }}{% endif %}</td>
+<td>{{ a.due_date or 'Not set' }}</td><td><span class="status {{ a.status|lower }}">{{ a.status }}</span></td>
+<td class="actions"><a href="{{ url_for('edit_assignment', assignment_id=a.id) }}">Edit</a>
+<form method="post" action="{{ url_for('toggle_assignment', assignment_id=a.id) }}"><button type="submit">{{ 'Reopen' if a.status == 'Completed' else 'Complete' }}</button></form>
+<form method="post" action="{{ url_for('remove_assignment', assignment_id=a.id) }}" data-confirm="Delete this assignment?"><button class="text-danger" type="submit">Delete</button></form></td></tr>
+{% else %}<tr><td colspan="5" class="empty">No assignments added yet.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if course else 'Add' }} course | StudyHub{% endblock %}
+{% block content %}
+<section class="form-card"><h2>{{ 'Update course' if course else 'Add a course' }}</h2>
+<form method="post">
+<label>Course name</label><input name="course_name" required value="{{ course.course_name if course else '' }}">
+<label>Course code</label><input name="course_code" required value="{{ course.course_code if course else '' }}">
+<label>Credit hours</label><input type="number" name="credit_hours" min="1" required value="{{ course.credit_hours if course else '' }}">
+<label>Semester</label><input name="semester" placeholder="e.g. 3rd" required value="{{ course.semester if course else '' }}">
+<div class="form-actions"><button class="primary" type="submit">Save course</button><a class="button secondary" href="{{ url_for('courses') }}">Cancel</a></div>
+</form></section>
+{% endblock %}

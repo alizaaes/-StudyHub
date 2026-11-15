@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if assignment else 'Add' }} assignment | StudyHub{% endblock %}
+{% block content %}
+<section class="form-card"><h2>{{ 'Update assignment' if assignment else 'Add an assignment' }}</h2>
+<form method="post">
+<label>Assignment title</label><input name="title" required value="{{ assignment.title if assignment else '' }}">
+<label>Description</label><textarea name="description" rows="4">{{ assignment.description if assignment else '' }}</textarea>
+<label>Course (optional)</label><select name="course_id"><option value="">No course selected</option>
+{% for c in courses %}<option value="{{ c.id }}" {% if assignment and assignment.course_id == c.id %}selected{% endif %}>{{ c.course_code }} — {{ c.course_name }}</option>{% endfor %}</select>
+<label>Due date</label><input type="date" name="due_date" value="{{ assignment.due_date if assignment and assignment.due_date else '' }}">
+{% if assignment %}<label>Status</label><select name="status"><option {% if assignment.status == 'Pending' %}selected{% endif %}>Pending</option><option {% if assignment.status == 'Completed' %}selected{% endif %}>Completed</option></select>{% endif %}
+<div class="form-actions"><button class="primary" type="submit">Save assignment</button><a class="button secondary" href="{{ url_for('assignments') }}">Cancel</a></div>
+</form></section>
+{% endblock %}
