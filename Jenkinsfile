@@ -24,6 +24,12 @@ pipeline {
             }
         }
 
+        stage('Automated tests') {
+            steps {
+                sh '.venv/bin/python -m pytest -v'
+            }
+        }
+
         stage('Build Docker image') {
             steps {
                 sh 'docker build -t studyhub:latest .'
